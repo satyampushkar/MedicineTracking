@@ -49,7 +49,7 @@ namespace MedicineAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpGet("{name}")]
+        [HttpGet("[action]/{name}")]
         public ActionResult<IEnumerable<Medicine>> Search(string name)
         {
             try
@@ -76,7 +76,7 @@ namespace MedicineAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpPost]
+        [HttpPut]
         public ActionResult<Medicine> Put([FromBody]Medicine medicine)
         {
             try
