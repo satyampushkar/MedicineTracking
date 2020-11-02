@@ -28,6 +28,7 @@ namespace Persistence.SQLiteDB
                     "Create Table IF NOT EXISTS MEDICINES(" +
                     "Id TEXT PRIMARY KEY , " +
                     "Name TEXT NOT NULL, " +
+                    "Brand TEXT NOT NULL, " +
                     "Price REAL NOT NULL, " +
                     "Quantity INTEGER NOT NULL, " +
                     "Expiry TEXT NOT NULL, " +
@@ -36,8 +37,8 @@ namespace Persistence.SQLiteDB
 
                 //insert into MEDICINES table
                 var insertCmd = conn.CreateCommand();
-                insertCmd.CommandText = $"INSERT INTO MEDICINES(Id, Name, Price, Quantity, Expiry, Notes) " +
-                    $"VALUES('{medicine.Id}', '{medicine.Name}', '{medicine.Price}', '{medicine.Quantity}', '{medicine.Expiry}', '{medicine.Notes}')";
+                insertCmd.CommandText = $"INSERT INTO MEDICINES(Id, Name, Brand, Price, Quantity, Expiry, Notes) " +
+                    $"VALUES('{medicine.Id}', '{medicine.Name}', '{medicine.Brand}', '{medicine.Price}', '{medicine.Quantity}', '{medicine.Expiry}', '{medicine.Notes}')";
                 insertCmd.ExecuteNonQuery();
             }
         }
@@ -50,7 +51,7 @@ namespace Persistence.SQLiteDB
                 conn.Open();
 
                 var fetchDataCmd = conn.CreateCommand();
-                fetchDataCmd.CommandText = $"SELECT Id, Name, Price, Quantity, Expiry, Notes FROM MEDICINES " +
+                fetchDataCmd.CommandText = $"SELECT Id, Name, Brand, Price, Quantity, Expiry, Notes FROM MEDICINES " +
                     $"WHERE Id = '{id}'";
 
                 using (var reader = fetchDataCmd.ExecuteReader())
@@ -61,10 +62,11 @@ namespace Persistence.SQLiteDB
                         {
                             Id = Guid.Parse(reader.GetString(0)),
                             Name = reader.GetString(1),
-                            Price = float.Parse(reader.GetString(2)),
-                            Quantity = int.Parse(reader.GetString(3)),
-                            Expiry = DateTime.Parse(reader.GetString(4)),
-                            Notes = reader.GetString(5)
+                            Brand = reader.GetString(2),
+                            Price = float.Parse(reader.GetString(3)),
+                            Quantity = int.Parse(reader.GetString(4)),
+                            Expiry = DateTime.Parse(reader.GetString(5)),
+                            Notes = reader.GetString(6)
                         };
                     }
                 }
@@ -79,7 +81,7 @@ namespace Persistence.SQLiteDB
             {
                 conn.Open();
                 var fetchDataCmd = conn.CreateCommand();
-                fetchDataCmd.CommandText = $"SELECT Id, Name, Price, Quantity, Expiry, Notes FROM MEDICINES ";
+                fetchDataCmd.CommandText = $"SELECT Id, Name, Brand, Price, Quantity, Expiry, Notes FROM MEDICINES ";
 
                 using (var reader = fetchDataCmd.ExecuteReader())
                 {
@@ -89,10 +91,11 @@ namespace Persistence.SQLiteDB
                         {
                             Id = Guid.Parse(reader.GetString(0)),
                             Name = reader.GetString(1),
-                            Price = float.Parse(reader.GetString(2)),
-                            Quantity = int.Parse(reader.GetString(3)),
-                            Expiry = DateTime.Parse(reader.GetString(4)),
-                            Notes = reader.GetString(5)
+                            Brand = reader.GetString(2),
+                            Price = float.Parse(reader.GetString(3)),
+                            Quantity = int.Parse(reader.GetString(4)),
+                            Expiry = DateTime.Parse(reader.GetString(5)),
+                            Notes = reader.GetString(6)
                         };
                         medicines.Add(medicine);
                     }
@@ -108,7 +111,7 @@ namespace Persistence.SQLiteDB
             {
                 conn.Open();
                 var fetchDataCmd = conn.CreateCommand();
-                fetchDataCmd.CommandText = $"SELECT Id, Name, Price, Quantity, Expiry, Notes FROM MEDICINES " +
+                fetchDataCmd.CommandText = $"SELECT Id, Name, Brand, Price, Quantity, Expiry, Notes FROM MEDICINES " +
                     $"WHERE Name LIKE '%{name}%'";
 
                 using (var reader = fetchDataCmd.ExecuteReader())
@@ -119,10 +122,11 @@ namespace Persistence.SQLiteDB
                         {
                             Id = Guid.Parse(reader.GetString(0)),
                             Name = reader.GetString(1),
-                            Price = float.Parse(reader.GetString(2)),
-                            Quantity = int.Parse(reader.GetString(3)),
-                            Expiry = DateTime.Parse(reader.GetString(4)),
-                            Notes = reader.GetString(5)
+                            Brand = reader.GetString(2),
+                            Price = float.Parse(reader.GetString(3)),
+                            Quantity = int.Parse(reader.GetString(4)),
+                            Expiry = DateTime.Parse(reader.GetString(5)),
+                            Notes = reader.GetString(6)
                         };
                         medicines.Add(medicine);
                     }
@@ -138,15 +142,16 @@ namespace Persistence.SQLiteDB
                 conn.Open();
 
                 //update into MEDICINES table
-                var insertCmd = conn.CreateCommand();
-                insertCmd.CommandText = $"UPDATE MEDICINES SET Id='{medicine.Id}', " +
+                var updateCmd = conn.CreateCommand();
+                updateCmd.CommandText = $"UPDATE MEDICINES SET Id='{medicine.Id}', " +
                     $"Name ='{medicine.Name}' , " +
+                    $"Brand ='{medicine.Brand}' , " +
                     $"Price = '{medicine.Price}', " +
                     $"Quantity= '{medicine.Quantity}', " +
                     $"Expiry= , '{medicine.Expiry}'" +
                     $"Notes= '{medicine.Notes}'" +
                     $" WHERE Id = '{medicine.Id}'";
-                insertCmd.ExecuteNonQuery();
+                updateCmd.ExecuteNonQuery();
             }
         }
     }
