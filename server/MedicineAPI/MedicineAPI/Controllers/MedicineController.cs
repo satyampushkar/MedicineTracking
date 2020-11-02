@@ -66,6 +66,7 @@ namespace MedicineAPI.Controllers
         {
             try
             {
+                medicine.Id = Guid.NewGuid();
                 var res = _medicineService.Add(medicine);
                 return Ok(res);
             }
