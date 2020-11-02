@@ -1,4 +1,5 @@
-﻿using MedicineModel;
+﻿using MedicineAPI.Persistence;
+using MedicineModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,29 +8,36 @@ namespace MedicineService
 {
     public class MedicineService : IMedicineService
     {
+        private readonly IPersistence _persistence;
+        public MedicineService(IPersistence persistence)
+        {
+            _persistence = persistence;
+        }
         public Medicine Add(Medicine medicine)
         {
-            throw new NotImplementedException();
+            _persistence.Add(medicine);
+            return medicine;
         }
 
         public Medicine Get(Guid id)
         {
-            throw new NotImplementedException();
+            return _persistence.Get(id);
         }
 
         public IEnumerable<Medicine> GetAll()
         {
-            throw new NotImplementedException();
+            return _persistence.GetAll();
         }
 
         public IEnumerable<Medicine> Search(string name)
         {
-            throw new NotImplementedException();
+            return _persistence.Search(name);
         }
 
         public Medicine Update(Medicine medicine)
         {
-            throw new NotImplementedException();
+            _persistence.Update(medicine);
+            return medicine;
         }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MedicineAPI.DTO;
 using MedicineModel;
 using MedicineService;
 using Microsoft.AspNetCore.Http;
@@ -67,8 +66,8 @@ namespace MedicineAPI.Controllers
         {
             try
             {
-                _medicineService.Add(medicine);
-                return Ok();
+                var res = _medicineService.Add(medicine);
+                return Ok(res);
             }
             catch (Exception ex)
             {

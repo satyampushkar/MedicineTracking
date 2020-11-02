@@ -19,39 +19,7 @@ namespace MedicineAPI.Test
             _factory = factory;
         }
 
-        [Fact]
-        public async Task TestGetAll()
-        {
-            var client = _factory.CreateClient();
-            var response = await client.GetAsync("api/Medicine");
-
-            response.EnsureSuccessStatusCode();
-            Assert.NotNull(response.Content);
-        }
-
-        [Theory]
-        [InlineData("crocin")]
-        [InlineData("")]
-        public async Task TestSearch(string name)
-        {
-            var client = _factory.CreateClient();
-            var response = await client.GetAsync("api/Medicine/search");
-
-            response.EnsureSuccessStatusCode();
-            Assert.NotNull(response.Content);
-        }
-
-        [Theory]
-        [InlineData("crocin")]
-        [InlineData("xyz")]
-        public async Task TestGetById(string id)
-        {
-            var client = _factory.CreateClient();
-            var response = await client.GetAsync($"api/Medicine/{id}");
-
-            response.EnsureSuccessStatusCode();
-            Assert.NotNull(response.Content);
-        }
+        
         [Theory]
         [MemberData(nameof(NewMedicineData))]
         public async Task TestPost(Medicine medicine, string expectedName)
@@ -64,7 +32,7 @@ namespace MedicineAPI.Test
             Assert.NotNull(response.Content);
 
             string res = response.Content.ReadAsStringAsync().Result;
-            var med = JsonSerializer.Deserialize<Medicine>(res);
+            var med = JsonSerializer.Deserialize<Medicine>(res, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             var actualName = med.Name;
 
             Assert.Equal(expectedName, actualName);
@@ -82,15 +50,50 @@ namespace MedicineAPI.Test
             Assert.NotNull(response.Content);
 
             string res = response.Content.ReadAsStringAsync().Result;
-            var actualId = Guid.Parse(res);
+            var med = JsonSerializer.Deserialize<Medicine>(res, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            var actualId = med.Id;
 
             Assert.Equal(expectedId, actualId);
+        }
+
+        [Fact]
+        public async Task TestGetAll()
+        {
+            var client = _factory.CreateClient();
+            var response = await client.GetAsync("api/Medicine");
+
+            response.EnsureSuccessStatusCode();
+            Assert.NotNull(response.Content);
+        }
+
+        [Theory]
+        [InlineData("Update1")]
+        //[InlineData("")]
+        public async Task TestSearch(string name)
+        {
+            var client = _factory.CreateClient();
+            var response = await client.GetAsync($"api/Medicine/search/{name}");
+
+            response.EnsureSuccessStatusCode();
+            Assert.NotNull(response.Content);
+        }
+
+        [Theory]
+        [InlineData("8ec63327-fe25-450e-8162-c4701b3c1b9b")]
+        public async Task TestGetById(string id)
+        {
+            var client = _factory.CreateClient();
+            var response = await client.GetAsync($"api/Medicine/{id}");
+
+            response.EnsureSuccessStatusCode();
+            Assert.NotNull(response.Content);
         }
 
         public static IEnumerable<object[]> NewMedicineData()
         {
             Medicine medicine1 = new Medicine
             {
+                Id = Guid.Parse("8ec63327-fe25-450e-8162-c4701b3c1b9b"),
                 Name = "Name1",
                 Brand = "Brand1",
                 Price = 10,
@@ -106,7 +109,7 @@ namespace MedicineAPI.Test
         {
             Medicine medicine1 = new Medicine
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.Parse("8ec63327-fe25-450e-8162-c4701b3c1b9b"),
                 Name = "Update1",
                 Brand = "UpdateBrand1",
                 Price = 10,

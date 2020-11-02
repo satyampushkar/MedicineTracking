@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Medicine.Persistence\MedicineAPI.Persistence.csproj" />
     <ProjectReference Include="..\MedicineModel\MedicineModel.csproj" />
   </ItemGroup>
 
