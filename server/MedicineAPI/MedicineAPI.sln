@@ -9,6 +9,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F7F0806C-6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicineAPI.Test", "MedicineAPI.Test\MedicineAPI.Test.csproj", "{7DA3BDC0-ACCE-4B16-889C-0A8E50C16326}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9725406D-0C9C-4F48-A749-8C873A071A0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicineService", "MedicineService\MedicineService.csproj", "{5079C28C-B700-481F-805C-B2C4F135A2A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicineModel", "MedicineModel\MedicineModel.csproj", "{EBE46EC6-2F1A-4D3E-AD1B-D9F2DAA5AF21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +29,23 @@ Global
 		{7DA3BDC0-ACCE-4B16-889C-0A8E50C16326}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DA3BDC0-ACCE-4B16-889C-0A8E50C16326}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DA3BDC0-ACCE-4B16-889C-0A8E50C16326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5079C28C-B700-481F-805C-B2C4F135A2A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5079C28C-B700-481F-805C-B2C4F135A2A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5079C28C-B700-481F-805C-B2C4F135A2A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5079C28C-B700-481F-805C-B2C4F135A2A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBE46EC6-2F1A-4D3E-AD1B-D9F2DAA5AF21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE46EC6-2F1A-4D3E-AD1B-D9F2DAA5AF21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBE46EC6-2F1A-4D3E-AD1B-D9F2DAA5AF21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBE46EC6-2F1A-4D3E-AD1B-D9F2DAA5AF21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{2447BDF4-C2BD-431F-A376-BE46ED11DBF1} = {9725406D-0C9C-4F48-A749-8C873A071A0C}
 		{7DA3BDC0-ACCE-4B16-889C-0A8E50C16326} = {F7F0806C-6137-4A16-9F9B-0A1E0F4C9F9D}
+		{5079C28C-B700-481F-805C-B2C4F135A2A0} = {9725406D-0C9C-4F48-A749-8C873A071A0C}
+		{EBE46EC6-2F1A-4D3E-AD1B-D9F2DAA5AF21} = {9725406D-0C9C-4F48-A749-8C873A071A0C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F0496C51-D2EC-488D-9298-DEFFAFC9AC1C}
